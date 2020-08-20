@@ -1,0 +1,55 @@
+h1 {
+    font-size: 48px;
+    color: #3c3c3c;
+}
+
+.menu {
+    padding: 2em 8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    position: relative;
+}
+
+img.orange-logo {
+    width: 28em;
+    height: 28em;
+
+    transition: transform cubic-bezier(0.68,-0.55,0.265,1.55) 0.6s;
+    z-index: 10;
+    position: relative;
+}
+
+.menu.animated img.orange-logo {
+    transform: translateX(100%) rotate(90deg);
+}
+
+.menu.animated .menu__buttons {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu__buttons {
+    width: 22em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 7em 3em;
+}
+
+.rules, .settings {
+    position: absolute;
+    padding: 0 2em 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.rules p, .settings p {
+    margin-bottom: 0.75em;
+}

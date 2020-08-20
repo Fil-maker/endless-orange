@@ -1,5 +1,37 @@
 {% extends "base.html" %}
+
+{% set jquery = True %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_page.css') }}">
+{% endblock styles %}
+
 {% block content %}
-<img src="{{ item.filename }}">
-<p>{{ quest.quest }}</p>
+    <h1>Бесконечный апельсин - игра для умных</h1>
+    <div class="menu">
+        <div class="left">
+            <div class="rules" style="display: none;">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse quo similique ipsa explicabo ut doloribus in dolore corrupti voluptatibus. Odio aliquid, sunt eius consequuntur commodi tempore officiis voluptas voluptate eum? Harum ad facere eaque magni, exercitationem, id nobis architecto doloribus, porro saepe rerum aut! Ratione vero veniam aperiam officia repellendus quod asperiores eius eaque, hic vitae eligendi aliquid, eos est, at rerum ex. Libero ex deleniti minus praesentium deserunt corporis quidem, animi delectus perferendis sit eum tenetur dolore provident veritatis minima unde incidunt dolorum ullam non sint doloribus, explicabo autem, expedita eligendi? Ut quasi hic, qui dolore esse placeat ducimus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit incidunt quas voluptates exercitationem voluptas libero magni necessitatibus. Quia, corrupti incidunt.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt ab distinctio maxime officia provident ducimus fugit eveniet aut asperiores est beatae saepe, eius sequi sed. Autem totam dolore natus, voluptatibus harum porro, reprehenderit voluptates commodi cupiditate voluptatem repudiandae eius, numquam quia. Ab quae sequi tempora quod eius.</p>
+                <button class="transparent-button bordered" id="rules__go-back">Назад<span></span></button>                
+            </div>
+            <div class="settings" style="display: none;">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse quo similique ipsa explicabo ut doloribus in dolore corrupti voluptatibus. Odio aliquid, sunt eius consequuntur commodi tempore officiis voluptas voluptate eum? Harum ad facere eaque magni, exercitationem, id nobis architecto doloribus, porro saepe rerum aut! Ratione vero veniam aperiam officia repellendus quod asperiores eius eaque, hic vitae eligendi aliquid, eos est, at rerum ex. Libero ex deleniti minus praesentium deserunt corporis quidem, animi delectus perferendis sit eum tenetur dolore provident veritatis minima unde incidunt dolorum ullam non sint doloribus, explicabo autem, expedita eligendi? Ut quasi hic, qui dolore esse placeat ducimus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit incidunt quas voluptates exercitationem voluptas libero magni necessitatibus. Quia, corrupti incidunt.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt ab distinctio maxime officia provident ducimus fugit eveniet aut asperiores est beatae saepe, eius sequi sed. Autem totam dolore natus, voluptatibus harum porro, reprehenderit voluptates commodi cupiditate voluptatem repudiandae eius, numquam quia. Ab quae sequi tempora quod eius.</p>
+                <button class="transparent-button bordered" id="settings__go-back">Назад<span></span></button>
+            </div>
+            <img class="orange-logo" src="{{ url_for('static', filename='img/orange.svg') }}" alt="апельсин">
+        </div>
+        <div class="menu__buttons">
+            <a class="transparent-button animation-trigger" id="rules-button">Правила<span></span></a>
+            <a class="transparent-button animation-trigger" id="settings-button">Настройки<span></span></a>
+            <a class="transparent-button" id="play-button" href="">Играть<span></span></a>
+        </div>
+    </div>
 {% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/main_page.js') }}"></script>
+{% endblock scripts %}
