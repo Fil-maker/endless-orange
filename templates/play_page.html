@@ -1,5 +1,64 @@
 {% extends "base.html" %}
+
+{% set jquery = True %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/play_page.css') }}">
+{% endblock styles %}
+
 {% block content %}
-<img src="{{ item.filename }}">
-<p>{{ quest.quest }}</p>
+    <div class="header">
+        <a href="/">
+            <img src="{{ url_for('static', filename='img/return-icon.svg') }}" class="return-icon" alt="Назад">
+        </a>
+    </div>
+    <div class="card">
+        <div class="card__item">
+            <img src="{{ item.filename }}" class="card__img">
+            <p class="card__item-name">{{ item.name }}</p>
+        </div>
+        <a class="card__swap-btn">
+            <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
+        </a>
+        <p class="card__quest">{{ quest.quest }}</p>
+    </div>
+    <div class="footer">
+        <div class="timer">
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+        </div>
+    </div>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/play_page.js') }}"></script>
+{% endblock scripts %}
