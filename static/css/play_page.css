@@ -23,6 +23,66 @@ main.container {
     align-items: center;
     height: 80%;
     padding: 10% 0;
+    position: relative;
+}
+
+.preloader {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.75);
+    z-index: 1000;
+    display: none;
+}
+
+.preloader::before {
+    content: "";
+    position: absolute;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.5em solid #F58420;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    top: calc(50% - 3em);
+    left: calc(50% - 3em);
+    animation: preloader-spinL 0.8s linear infinite;
+}
+
+.preloader::after {
+    content: "";
+    position: absolute;
+    width: 6.5em;
+    height: 6.5em;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.5em solid #EF4823;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    top: calc(50% - 3.75em);
+    left: calc(50% - 3.75em);
+    animation: preloader-spinR 1.6s linear infinite;
+}
+
+@keyframes preloader-spinL {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+@keyframes preloader-spinR {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .card__item, .card__quest {

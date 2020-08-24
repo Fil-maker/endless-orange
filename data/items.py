@@ -1,9 +1,10 @@
 import sqlalchemy
+from sqlalchemy_serializer import SerializerMixin
 
 from data.db_session import SqlAlchemyBase
 
 
-class Items(SqlAlchemyBase):
+class Items(SqlAlchemyBase, SerializerMixin):
     __tablename__ = 'items'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
