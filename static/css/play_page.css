@@ -33,6 +33,7 @@ main.container {
 #return-icon {
     height: 100%;
     width: 100%;
+    min-height: 2em;
     background: url("../img/return-icon.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -308,5 +309,21 @@ main.container {
 
     .header, .footer {
         height: 7.5%;
+    }
+}
+
+@media(orientation: landscape) and (max-height: 600px) {
+    body {
+        font-size: 12px;
+    }
+
+    main.container {
+        padding: 1em 10%;
+        height: calc(100vh - 4em);
+        height: calc(var(--vh, 1vh) * 100 - 2em);
+    }
+
+    .card__swap-btn {
+        width: 6em;
     }
 }

@@ -16,7 +16,6 @@ def add_header(r):
     and also to cache the rendered page for 10 minutes.
     """
 
-    print(app.config["DEBUG"])
     if not app.config["DEBUG"]:
         return r
 
@@ -78,7 +77,7 @@ def excluding_randint(start, end, exclusion):
 
 def main():
     global_init("db/endless_orange.sqlite")
-    app.run(port=8080, debug=True, host="192.168.1.77")
+    app.run(port=8080, debug=True)
 
 
 if __name__ == "__main__":
