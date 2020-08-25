@@ -1,6 +1,14 @@
+main.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 h1 {
     font-size: 48px;
     color: #3c3c3c;
+    margin-bottom: 1rem;;
 }
 
 .menu {

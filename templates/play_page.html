@@ -8,9 +8,7 @@
 
 {% block content %}
     <div class="header">
-        <a href="/">
-            <img src="{{ url_for('static', filename='img/return-icon.svg') }}" class="return-icon" alt="Назад">
-        </a>
+        <a id="return-icon" href="/"></a>
     </div>
     <div class="card">
         <div class="preloader"></div>
@@ -62,4 +60,5 @@
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/play_page.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/remove-address-bar.js') }}"></script>
 {% endblock scripts %}

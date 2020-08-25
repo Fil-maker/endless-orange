@@ -9,6 +9,23 @@ from data.quests import Quests
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret_key"
 
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+
+    print(app.config["DEBUG"])
+    if not app.config["DEBUG"]:
+        return r
+
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
 
 @app.route("/")
 def main_page():
@@ -61,7 +78,7 @@ def excluding_randint(start, end, exclusion):
 
 def main():
     global_init("db/endless_orange.sqlite")
-    app.run(port=8080, debug=True)
+    app.run(port=8080, debug=True, host="192.168.1.77")
 
 
 if __name__ == "__main__":

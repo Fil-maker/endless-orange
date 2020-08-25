@@ -1,8 +1,22 @@
+body {
+    position: fixed;
+}
+
 main.container {
-    height: calc(100vh - 8em);
+    height: calc(100vh - 8em); /* фолбэк для браузеров, которые не поддерживают пользовательские свойства */
+    height: calc(var(--vh, 1vh) * 100 - 8em);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+}
+
+@media(max-width: 1366px) {
+    main.container {
+        padding: 2em 10%;
+        height: calc(100vh - 4em);
+        height: calc(var(--vh, 1vh) * 100 - 4em);
+    }
 }
 
 .header, .footer {
@@ -10,10 +24,18 @@ main.container {
     display: block;
 }
 
-.return-icon {
+.header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#return-icon {
     height: 100%;
-    width: auto;
-    margin: 0.5em;
+    width: 100%;
+    background: url("../img/return-icon.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .card {
@@ -50,6 +72,9 @@ main.container {
     top: calc(50% - 3em);
     left: calc(50% - 3em);
     animation: preloader-spinL 0.8s linear infinite;
+    -o-animation: preloader-spinL 0.8s linear infinite;
+    -moz-animation: preloader-spinL 0.8s linear infinite;
+    -webkit-animation: preloader-spinL 0.8s linear infinite;
 }
 
 .preloader::after {
@@ -65,9 +90,39 @@ main.container {
     top: calc(50% - 3.75em);
     left: calc(50% - 3.75em);
     animation: preloader-spinR 1.6s linear infinite;
+    -o-animation: preloader-spinR 1.6s linear infinite;
+    -moz-animation: preloader-spinR 1.6s linear infinite;
+    -webkit-animation: preloader-spinR 1.6s linear infinite;
 }
 
 @keyframes preloader-spinL {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+@-o-keyframes preloader-spinL {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+@-moz-keyframes preloader-spinL {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+@-webkit-keyframes preloader-spinL {
 	from {
 		transform: rotate(0deg);
 	}
@@ -85,6 +140,33 @@ main.container {
 	}
 }
 
+@-o-keyframes preloader-spinR {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@-moz-keyframes preloader-spinR {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes preloader-spinR {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .card__item, .card__quest {
     width: 40%;
     height: 100%;
@@ -92,11 +174,19 @@ main.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .card__swap-btn {
-    width: 10%;
+    width: 10em;
     cursor: pointer;
+
+    padding: 1em 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 
     user-select: none;
     -moz-user-select: none;
@@ -113,33 +203,110 @@ main.container {
     text-transform: capitalize;
     text-align: center;
 
-    font-size: 24px;
+    font-size: 1.5em;
     font-family: "Russo one", sans-serif;
 }
 
 .card__quest {
     text-align: center;
-    font-size: 32px;
-    overflow-y: auto;
+    font-size: 2em;
+    overflow-wrap: anywhere;
 }
 
 .timer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     height: 100%;
 }
 
 .timer__cell {
     width: 2.5%;
     height: 75%;
+    max-height: 1.5em;
     border: 1px solid #6e6e6e;
     border-radius: 8px;
     background-color: #F58420;
     transition: background-color 0s;
 }
 
+.timer__cell.disabled {
+    display: none;
+}
+
 .timer__cell.empty {
     background-color: transparent;
     transition: background-color 2s ease-out;
+}
+
+.timer__cell.extended {
+    width: 5%;
+    height: 75%;
+    max-height: 2em;
+}
+
+.timer__cell.extended.empty {
+    background-color: transparent;
+    transition: background-color 4s ease-out;
+}
+
+@media(orientation: portrait) {
+    body {
+        font-size: 24px;
+    }
+
+    .card {
+        flex-direction: column;
+        padding: 5% 0;
+    }
+
+    .card__item, .card__quest {
+        width: 100%;
+    }
+
+    .card__swap-btn {
+        height: 15%;
+    }
+
+    #swap-btn {
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #swap-btn > svg {
+        width: auto !important;
+        height: 100% !important;
+    }
+
+    .card__item {
+        max-width: 70%;
+        height: unset;
+    }
+
+    .card__quest {
+        height: fit-content;
+        max-width: 100%;
+        overflow: unset;
+    }
+
+    .card__img {
+        width: 80%;
+    }
+
+    .timer__cell {
+        max-height: 0.75em;
+    }
+}
+
+@media(max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+
+    .header, .footer {
+        height: 7.5%;
+    }
 }

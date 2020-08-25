@@ -10,6 +10,8 @@ swapAnimation.addEventListener("complete", function() {
     swapAnimation.goToAndStop(0);
 });
 
+resize_timer_line();
+
 $("#swap-btn").on("click", function() {
     updateCard();
     swapAnimation.play();
@@ -85,4 +87,16 @@ function resetTimer() {
             i++;
         }
     }, 60 * 1000 / cell_count)
+}
+
+$(window).on("resize", resize_timer_line);
+
+function resize_timer_line() {
+    if (window.innerWidth <= 500) {
+        $(".timer__cell:nth-child(even)").addClass("disabled");
+        $(".timer__cell:nth-child(odd)").addClass("extended");
+    } else {
+        $(".timer__cell:nth-child(even)").removeClass("disabled");
+        $(".timer__cell:nth-child(odd)").removeClass("extended");
+    }
 }
