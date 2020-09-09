@@ -9,6 +9,9 @@ from data.quests import Quests
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret_key"
 
+global_init("db/endless_orange.sqlite")
+
+
 @app.after_request
 def add_header(r):
     """
@@ -76,7 +79,6 @@ def excluding_randint(start, end, exclusion):
 
 
 def main():
-    global_init("db/endless_orange.sqlite")
     app.run(port=8080, debug=True)
 
 
