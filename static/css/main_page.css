@@ -1,5 +1,10 @@
+body {
+    position: fixed;
+}
+
 main.container {
-    height: 100vh;
+    height: calc(100vh - 8em); /* фолбэк для браузеров, которые не поддерживают пользовательские свойства */
+    height: calc(var(--vh, 1vh) * 100 - 8em);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,10 +56,14 @@ img.orange-logo {
 .rules, .settings {
     position: absolute;
     padding: 0 2em 0 0;
+    height: 100%;
+
+    font-size: 1.2em;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     z-index: 1;
 }
 
