@@ -47,6 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .transparent-button.bordered {
+    height: calc(1.5em + 4px);
     border: 2px solid #FFDA7D;
 }
 

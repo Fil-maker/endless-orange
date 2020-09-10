@@ -10,18 +10,6 @@ main.container {
     justify-content: center;
 }
 
-@media(max-width: 1366px) {
-    main.container {
-        padding: 2em 10%;
-        height: calc(100vh - 4em);
-        height: calc(var(--vh, 1vh) * 100 - 4em);
-    }
-
-    .menu {
-        padding: 2em 4em;
-    }
-}
-
 h1 {
     font-size: 3em;
     color: #3c3c3c;
@@ -33,19 +21,23 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: 60%;
 }
 
 .left {
     position: relative;
+    width: 50%;
+    height: 100%;
 }
 
 img.orange-logo {
-    width: 28em;
-    height: 28em;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    -o-object-fit: contain;
 
     transition: transform cubic-bezier(0.68,-0.55,0.265,1.55) 0.6s;
     z-index: 10;
-    position: relative;
 }
 
 .menu.animated img.orange-logo {
@@ -58,7 +50,7 @@ img.orange-logo {
 }
 
 .menu__buttons {
-    width: 22em;
+    width: calc(50% - 3em);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -88,7 +80,19 @@ img.orange-logo {
     margin: 0.5em 0 0 0;
 }
 
-@media(max-width: 940px) {
+@media(max-width: 1366px) {
+    main.container {
+        padding: 2em 10%;
+        height: calc(100vh - 4em);
+        height: calc(var(--vh, 1vh) * 100 - 4em);
+    }
+
+    .menu {
+        padding: 2em 0;
+    }
+}
+
+@media(orientation: portrait) and (max-width: 940px) {
     .menu {
         padding: 2em 10%;
         flex-direction: column;
@@ -107,7 +111,7 @@ img.orange-logo {
     }
 }
 
-@media(max-width: 768px) {
+@media(orientation: portrait) and (max-width: 768px) {
     main.container {
         padding: 2em 5%;
     }
@@ -131,12 +135,22 @@ img.orange-logo {
     }
 }
 
-@media(max-width: 500px) {
+@media(max-width: 500px), (max-height: 500px) {
     body {
         font-size: 12px;
     }
 
     .rules button, .settings button {
         font-size: 1.25em;
+    }
+}
+
+@media(max-width: 380px), (max-height: 380px) {
+    body {
+        font-size: 10px;
+    }
+
+    .rules button, .settings button {
+        font-size: 1em;
     }
 }
