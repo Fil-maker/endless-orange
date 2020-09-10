@@ -66,6 +66,25 @@ def get_new_card():
     })
 
 
+
+@app.route("/ajax/get-n-items", methods=["POST"])
+def get_new_card():
+    data = request.get_json()
+    try:
+        prev_cards = data["cardsIDs"]
+        count = data["countCards"]
+    except ValueError:
+        abort(400, "Id must be integer")
+
+    session = create_session()
+
+    cards = [excluding_randint(1, session.query(Items).count(), prev_cards[i]) for i in range(count)]
+
+    return jsonify({
+        "items": [item.to_dict() for item in cards]
+    })
+
+
 def excluding_randint(start, end, exclusion):
     if exclusion == start:
         return random.randint(start + 1, end)
