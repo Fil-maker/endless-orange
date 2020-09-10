@@ -10,8 +10,20 @@ main.container {
     justify-content: center;
 }
 
+@media(max-width: 1366px) {
+    main.container {
+        padding: 2em 10%;
+        height: calc(100vh - 4em);
+        height: calc(var(--vh, 1vh) * 100 - 4em);
+    }
+
+    .menu {
+        padding: 2em 4em;
+    }
+}
+
 h1 {
-    font-size: 48px;
+    font-size: 3em;
     color: #3c3c3c;
     margin-bottom: 1rem;;
 }
@@ -65,8 +77,66 @@ img.orange-logo {
     align-items: center;
     justify-content: center;
     z-index: 1;
+    padding: 0.5em;
 }
 
 .rules p, .settings p {
-    margin-bottom: 0.75em;
+    overflow-y: auto;
+}
+
+.rules button, .settings button {
+    margin: 0.5em 0 0 0;
+}
+
+@media(max-width: 940px) {
+    .menu {
+        padding: 2em 10%;
+        flex-direction: column;
+    }
+
+    .menu__buttons {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 3em 3em;
+    }
+
+    .transparent-button {
+        width: fit-content;
+        padding: 0.25em 1em;
+    }
+}
+
+@media(max-width: 768px) {
+    main.container {
+        padding: 2em 5%;
+    }
+
+    .menu__buttons {
+        padding: 3em 1em;
+        justify-content: space-between;
+    }
+
+    .menu {
+        padding: 2em 5%;
+    }
+
+    .left {
+        width: 80%;
+    }
+
+    img.orange-logo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media(max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+
+    .rules button, .settings button {
+        font-size: 1.25em;
+    }
 }

@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .transparent-button {
-    font-size: 24px;
+    font-size: 1.5em;
 
     border-radius: 0.75em;
     background: none;
