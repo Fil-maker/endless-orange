@@ -34,6 +34,11 @@ def main_page():
     return render_template("main_page.html")
 
 
+@app.route("/settings")
+def settings_page():
+    return render_template("settings_page.html")
+
+
 @app.route("/play")
 def play_page():
     session = create_session()

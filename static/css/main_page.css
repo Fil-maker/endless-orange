@@ -57,7 +57,7 @@ img.orange-logo {
     padding: 7em 3em;
 }
 
-.rules, .settings {
+.rules {
     position: absolute;
     padding: 0 2em 0 0;
     height: 100%;
@@ -72,11 +72,11 @@ img.orange-logo {
     padding: 0.5em;
 }
 
-.rules p, .settings p {
+.rules p {
     overflow-y: auto;
 }
 
-.rules button, .settings button {
+.rules button {
     margin: 0.5em 0 0 0;
 }
 

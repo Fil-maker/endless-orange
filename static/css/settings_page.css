@@ -1,0 +1,281 @@
+h2 {
+    font-size: 3em;
+}
+
+ h3 {
+    text-align: left;
+    font-size: 1.5em;
+}
+
+.mode-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.game-mode {
+    width: 10em;
+
+    list-style-type: none;
+
+    padding: 2em 1.5em;
+    border: 1px solid #acacac;
+    border-radius: 1em;
+    margin: 1em;
+
+    transition: box-shadow ease-out 0.1s;
+    cursor: pointer;
+}
+
+.game-mode h5 {
+    font-size: 1em;
+}
+
+.game-mode:hover {
+    box-shadow: inset 0 0 0 0.3em #f5832088;
+}
+
+.game-mode:focus {
+    box-shadow: inset 0 0 0 0.5em #f5832088;
+}
+
+.game-mode.selected, .game-mode:active {
+    box-shadow: inset 0 0 0 0.5em #F58420;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.form-radio {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 0.25em 0;
+}
+
+.form-radio label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+    user-select: none;
+    margin-left: 0.5em;
+}
+
+.form-radio .marker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 18px;
+	height: 18px;
+    box-shadow: 0 0 0 2px #F58420;
+    border-radius: 50%;
+}
+
+.form-radio .marker .inner {
+	width: 0;
+    height: 0;
+    background-color: #FFB730;
+    border-radius: 50%;
+
+    transition: width ease 0.25s,
+                height ease 0.25s;
+}
+
+.marker:focus .inner {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+}
+
+.form-radio input[type=radio]:checked + .marker .inner {
+    width: 14px;
+    height: 14px;
+    opacity: 1;
+}
+
+.settings {
+    display: none;
+}
+
+.settings.active {
+    display: block;
+}
+
+.settings.endless-orange-settings.active {
+    display: grid;
+}
+
+.endless-orange-settings {
+    grid-template-areas: "t q"
+                         "r c";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.5em;
+}
+
+.endless-orange-settings .time {
+    grid-area: t;
+}
+
+.endless-orange-settings .number-of-rounds {
+    grid-area: r;
+}
+
+.endless-orange-settings .question-types {
+    grid-area: q;
+}
+
+.endless-orange-settings .communication-types {
+    grid-area: c;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type="range"] {
+    display: block;
+    appearance: none;
+    width: calc(100% - 4em);
+    height: 0.75em;
+    border-radius: 5px;
+    background: #FFDA7D;
+    outline: none;
+    padding: 0;
+    margin: 1em 2em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #FFB730;
+    cursor: pointer;
+
+    transition: background linear 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #F58420;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 5px #F58420;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    background: #F58420;
+}
+
+.toggle-switch-wrapper {
+    width: 100%;
+    height: calc(2em + 2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0.5em 0;
+}
+
+.toggle-switch-wrapper span {
+    margin: 0 1em;
+    font-family: "Russo one", sans-serif;;
+    color: #3c3c3c;
+}
+
+.toggle-switch-wrapper img {
+    height: 100%;
+    margin: 0 1em
+}
+
+.toggle-switch {
+    display: flex;
+    width: 4em;
+    height: 2em;
+    border-radius: 4em;
+    border: 2px solid #FFDA7D;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    transition: border linear 0.2s;
+}
+
+.toggle-switch:focus {
+    border-color: #F58420;
+}
+
+.toggle-switch:active {
+    border-color: #F58420;
+}
+
+.toggle-switch.triple {
+    width: 6em;
+}
+
+.toggler-label {
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.toggle-switch.double .toggler-label {
+    width: 50%;
+    height: 100%;
+    display: none;
+}
+
+.toggle-switch.triple .toggler-label {
+    width: 33.333%;
+    height: 100%;
+}
+
+.toggle-switch.triple .toggler-label img {
+    margin: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    border-radius: 50%;
+}
+
+.toggle-switch.triple .toggler-label.active svg {
+    color: #fff;
+}
+
+.toggler {
+    position: absolute;
+    width: calc(2em - 4px);
+    height: calc(2em - 4px);
+    border-radius: 50%;
+    background-color: #FFB730;
+    transition: transform ease-out 0.2s,
+                background-color linear 0.2s;
+}
+
+.toggle-switch:hover .toggler,
+.toggle-switch:active .toggler {
+    background-color: #F58420;
+}
+
+.toggle-switch.double .toggler {
+    top: 2px;
+    left: 2px;
+}
+
+.toggle-switch.triple .toggler {
+    top: 2px;
+    left: calc(2px + 2em);
+}
+
+.toggle-switch .toggler.left {
+    transform: translateX(-2em);
+}
+
+.toggle-switch.double .toggler.left,
+.toggle-switch .toggler.middle {
+    transform: translateX(0);
+}
+
+.toggle-switch .toggler.right {
+    transform: translateX(2em)
+}

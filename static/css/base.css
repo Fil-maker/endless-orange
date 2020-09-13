@@ -19,6 +19,7 @@ main.container {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Russo one", sans-serif;
     text-align: center;
+    color: #3c3c3c;
 }
 
 .transparent-button {
@@ -79,5 +80,5 @@ h1, h2, h3, h4, h5, h6 {
 }
   
 .transparent-button:hover:active {
-    background-color: $btn-color;
+    background-color: rgb(255, 160, 0, 0.75);
 }

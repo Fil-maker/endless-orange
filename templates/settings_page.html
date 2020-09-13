@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% set jquery = True %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings_page.css') }}">
+{% endblock styles %}
+
+{% block content %}
+    <h2>Настройка</h2>
+    <div class="select-mode">
+        <h3>Выберите режим игры:</h3>
+        <ul class="mode-list">
+            <li class="game-mode selected" tabindex="1">
+                <div class="picture">
+                    <img src="{{ url_for('static', filename='img/game-modes/third-wheel.svg') }}" alt="">
+                </div>
+                <h5 class="mode-name">Третий лишний</h5>
+            </li>
+            <li class="game-mode" tabindex="1">
+                <div class="picture">
+                    <img src="{{ url_for('static', filename='img/game-modes/endless-orange.svg') }}" alt="">
+                </div>
+                <h5 class="mode-name">Бесконечный апельсин</h5>
+            </li>
+        </ul>
+    </div>
+    <div class="settings-container">
+        <div class="settings third-wheel-settings active">
+            <div class="level">
+                <h3>Выберите сложность:</h3>
+                <div class="form-radio"><input type="radio" name="level" id="level1" checked><label for="level1" class="marker" tabindex="1"><div class="inner"></div></label><label for="level1">1 уровень (2 карточки)</label></div>
+                <div class="form-radio"><input type="radio" name="level" id="level2"><label for="level2" class="marker" tabindex="1"><div class="inner"></div></label><label for="level2">2 уровень (3 карточки)</label></div>
+                <div class="form-radio"><input type="radio" name="level" id="level3"><label for="level3" class="marker" tabindex="1"><div class="inner"></div></label><label for="level3">3 уровень (4 карточки)</label></div>
+            </div>
+        </div>
+        <div class="settings endless-orange-settings">
+            <div class="time">
+                <label for="time-input">Время раунда: <span id="time-value"></span></label>
+                <input type="range" min="1" max="5" value="2" id="time-input" name="time">
+            </div>
+            <div class="number-of-rounds">
+                <label for="rounds-input">Количество кругов: <span id="rounds-value"></span></label>
+                <input type="range" min="1" max="20" value="10" id="rounds-input" name="rounds">
+            </div>
+            <div class="question-types">
+                <p>Тип вопросов: </p>
+                <div class="toggle-switch-wrapper">
+                    <span>РТВ</span>
+                    <div class="toggle-switch double" tabindex="0">
+                        <label for="dci-radio" class="toggler-label">
+                            <input type="radio" data-position="left" id="dci-radio" name="question-type" class="toggle-switch-radio" checked>
+                        </label>
+                        <label for="tips-radio" class="toggler-label">
+                            <input type="radio" data-position="right" id="tips-radio" name="question-type" class="toggle-switch-radio">
+                        </label>
+                        <div class="toggler left"></div>
+                    </div>
+                    <span>ТРИЗ</span>
+                </div>
+            </div>
+            <div class="communication-types">
+                <p>Тип коммуникации: </p>
+                <div class="toggle-switch-wrapper">
+                    <img src="{{ url_for('static', filename='img/communication-types/person.svg') }}">
+                    <div class="toggle-switch triple" tabindex="0">
+                        <label for="host-radio" class="toggler-label">
+                            <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}">
+                            <input type="radio" data-position="left" id="host-radio" name="comminucation-type" class="toggle-switch-radio">
+                        </label>
+                        <label for="both-radio" class="toggler-label">
+                            <img src="{{ url_for('static', filename='img/communication-types/double-arrow.svg') }}">
+                            <input type="radio" data-position="middle" id="both-radio" name="comminucation-type" class="toggle-switch-radio" checked>
+                        </label>
+                        <label for="team-radio" class="toggler-label">
+                            <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}" style="transform: rotate(180deg);">
+                            <input type="radio" data-position="right" id="team-radio" name="comminucation-type" class="toggle-switch-radio">
+                        </label>
+                        <div class="toggler middle"></div>
+                    </div>
+                    <img src="{{ url_for('static', filename='img/communication-types/team.svg') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+        <a href="/play" class="transparent-button bordered" id="play-button">Играть<span></span></a>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/settings_page.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/remove-address-bar.js') }}"></script>
+{% endblock scripts %}
