@@ -44,15 +44,15 @@
                 <input type="range" min="1" max="20" value="10" id="rounds-input" name="rounds">
             </div>
             <div class="question-types">
-                <p>Тип вопросов: </p>
+                <p>Тип вопросов: <span id="question-type-value"></span></p>
                 <div class="toggle-switch-wrapper">
                     <span>РТВ</span>
                     <div class="toggle-switch double" tabindex="0">
                         <label for="dci-radio" class="toggler-label">
-                            <input type="radio" data-position="left" id="dci-radio" name="question-type" class="toggle-switch-radio" checked>
+                            <input type="radio" data-position="left" id="dci-radio" name="question-type" class="toggle-switch-radio" data-name="РТВ" data-fullname="Развитие творческого воображения" checked>
                         </label>
                         <label for="tips-radio" class="toggler-label">
-                            <input type="radio" data-position="right" id="tips-radio" name="question-type" class="toggle-switch-radio">
+                            <input type="radio" data-position="right" id="tips-radio" name="question-type" class="toggle-switch-radio" data-name="ТРИЗ" data-fullname="Теория решения изобретательских задач">
                         </label>
                         <div class="toggler left"></div>
                     </div>
@@ -60,21 +60,21 @@
                 </div>
             </div>
             <div class="communication-types">
-                <p>Тип коммуникации: </p>
+                <p>Тип коммуникации: <span id="communication-type-value"></span></p>
                 <div class="toggle-switch-wrapper">
                     <img src="{{ url_for('static', filename='img/communication-types/person.svg') }}">
                     <div class="toggle-switch triple" tabindex="0">
                         <label for="host-radio" class="toggler-label">
                             <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}">
-                            <input type="radio" data-position="left" id="host-radio" name="comminucation-type" class="toggle-switch-radio">
+                            <input type="radio" data-position="left" id="host-radio" name="comminucation-type" class="toggle-switch-radio" data-name="туда">
                         </label>
                         <label for="both-radio" class="toggler-label">
                             <img src="{{ url_for('static', filename='img/communication-types/double-arrow.svg') }}">
-                            <input type="radio" data-position="middle" id="both-radio" name="comminucation-type" class="toggle-switch-radio" checked>
+                            <input type="radio" data-position="middle" id="both-radio" name="comminucation-type" class="toggle-switch-radio" data-name="туда-сюда" checked>
                         </label>
                         <label for="team-radio" class="toggler-label">
                             <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}" style="transform: rotate(180deg);">
-                            <input type="radio" data-position="right" id="team-radio" name="comminucation-type" class="toggle-switch-radio">
+                            <input type="radio" data-position="right" id="team-radio" name="comminucation-type" class="toggle-switch-radio" data-name="сюда">
                         </label>
                         <div class="toggler middle"></div>
                     </div>
@@ -86,7 +86,17 @@
     <div class="buttons">
         <a href="/play" class="transparent-button bordered" id="play-button">Играть<span></span></a>
     </div>
+
+    <span id="tooltip"></span>
 {% endblock content %}
+
+{% block additional_styles %}
+    <style>
+        [data-tooltip]:before {
+            background-image: url("{{ url_for('static', filename='img/question-mark.svg') }}");
+        }
+    </style>
+{% endblock additional_styles %}
 
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/settings_page.js') }}"></script>

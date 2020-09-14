@@ -279,3 +279,30 @@ input[type="range"]:active::-webkit-slider-thumb {
 .toggle-switch .toggler.right {
     transform: translateX(2em)
 }
+
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:before {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-size: cover;
+    top: -0.2em;
+    right: -1em;
+}
+
+span#tooltip {
+    z-index: 9999;
+	position: absolute;
+	display: none;
+	top: 0px;
+	left: 0px;
+	background-color: #3c3c3c;
+	padding: 5px 10px 5px 10px;
+	color: white;
+	opacity: 0.8;
+    border-radius: 5px;
+}
