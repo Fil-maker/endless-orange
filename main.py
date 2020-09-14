@@ -1,13 +1,17 @@
+import os
 import random
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from flask_restful import abort
+from werkzeug.utils import redirect
 
 from data.db_session import global_init, create_session
 from data.items import Items
 from data.quests import Quests
+from forms.endless_orange_settings import EndlessOrangeSettingsForm
+from forms.third_wheel_settings import ThirdWheelSettingsForm
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret_key"
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "secret_key_123")
 
 global_init("db/endless_orange.sqlite")
 
@@ -34,9 +38,35 @@ def main_page():
     return render_template("main_page.html")
 
 
-@app.route("/settings")
+@app.route("/settings", methods=["GET", "POST"])
 def settings_page():
-    return render_template("settings_page.html")
+    third_wheel_settings = ThirdWheelSettingsForm()
+    endless_orange_settings = EndlessOrangeSettingsForm()
+    if request.method == "POST":
+        # Сохраняем введенные настройки в куки и перенаправляем на страницу игры
+        if request.form.get("mode", None) == "third-wheel" and third_wheel_settings.validate_on_submit():
+            response = make_response(redirect("/play"))
+            response.set_cookie("mode", third_wheel_settings.mode.data, max_age=86400*365)
+            response.set_cookie("level", str(third_wheel_settings.level.data), max_age=86400*365)
+            return response
+        elif request.form.get("mode", None) == "endless-orange" and endless_orange_settings.validate_on_submit():
+            response = make_response(redirect("/play"))
+            response.set_cookie("mode", endless_orange_settings.mode.data, max_age=86400*365)
+            response.set_cookie("time", str(endless_orange_settings.time.data), max_age=86400*365)
+            response.set_cookie("rounds", str(endless_orange_settings.rounds.data), max_age=86400*365)
+            response.set_cookie("question_type", endless_orange_settings.question_type.data, max_age=86400*365)
+            response.set_cookie("communication_type", endless_orange_settings.communication_type.data, max_age=86400*365)
+            return response
+        else:
+            return redirect("settings")
+
+    params = {
+        "third_wheel_settings": third_wheel_settings,
+        "endless_orange_settings": endless_orange_settings,
+        "cookies": request.cookies
+    }
+
+    return render_template("settings_page.html", **params)
 
 
 @app.route("/play")
@@ -84,7 +114,7 @@ def excluding_randint(start, end, exclusion):
 
 
 def main():
-    app.run(port=8080, debug=True)
+    app.run(port=8080, debug=True, host="192.168.1.77")
 
 
 if __name__ == "__main__":

@@ -32,7 +32,6 @@ $(document).on("keydown", function(e) {
 // Ввод времени раунда
 var timeValue = $("#time-value");
 var timeInput = $("#time-input");
-updateTimeValue();
 timeInput.on("input", updateTimeValue);
 
 function updateTimeValue() {
@@ -49,7 +48,6 @@ function updateTimeValue() {
 // Ввод количества раундов
 var roundsValue = $("#rounds-value");
 var roundsInput = $("#rounds-input");
-updateRoundsValue();
 roundsInput.on("input", updateRoundsValue)
 
 function updateRoundsValue() {
@@ -119,3 +117,7 @@ $("[data-tooltip]").mousemove(function (eventObject) {
             });
     });
 });
+
+$("#play-button").on("click", function() {
+    $("form.active").submit();
+})
