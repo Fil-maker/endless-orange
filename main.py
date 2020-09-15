@@ -11,7 +11,7 @@ from forms.endless_orange_settings import EndlessOrangeSettingsForm
 from forms.third_wheel_settings import ThirdWheelSettingsForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "secret_key_123")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "secret_key_123")
 
 global_init("db/endless_orange.sqlite")
 
@@ -103,7 +103,7 @@ def get_new_card():
 
 
 @app.route("/ajax/get-n-items", methods=["POST"])
-def get_new_card():
+def get_n_items():
     data = request.get_json()
     try:
         prev_cards = list(map(int, data["cardsIDs"]))
@@ -114,10 +114,10 @@ def get_new_card():
 
     session = create_session()
 
-    cards = random.sample(set(range(1, session.query(Items).count())) ^ set(prev_cards), count)
+    items = random.sample(set(range(1, session.query(Items).count())) ^ set(prev_cards), count)
 
     return jsonify({
-        "items": [item.to_dict() for item in cards]
+        "items": [item.to_dict() for item in items]
     })
 
 
