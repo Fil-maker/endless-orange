@@ -87,6 +87,7 @@ def get_new_card():
         prev_quest_id = int(data["previousQuestId"])
     except ValueError:
         abort(400, "Id must be integer")
+        return
 
     session = create_session()
 
@@ -101,19 +102,19 @@ def get_new_card():
     })
 
 
-
 @app.route("/ajax/get-n-items", methods=["POST"])
 def get_new_card():
     data = request.get_json()
     try:
-        prev_cards = data["cardsIDs"]
-        count = data["countCards"]
+        prev_cards = list(map(int, data["cardsIDs"]))
+        count = int(data["countCards"])
     except ValueError:
-        abort(400, "Id must be integer")
+        abort(400, "Id and count must be integers")
+        return
 
     session = create_session()
 
-    cards = [excluding_randint(1, session.query(Items).count(), prev_cards[i]) for i in range(count)]
+    cards = random.sample(set(range(1, session.query(Items).count())) ^ set(prev_cards), count)
 
     return jsonify({
         "items": [item.to_dict() for item in cards]
