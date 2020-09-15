@@ -1,0 +1,35 @@
+.card[data-count="2"] .card__swap-btn {
+    order: 1;
+}
+
+.card[data-count="3"] {
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    padding: 5%;
+}
+
+.card[data-count="3"] .card__item {
+    width: 30%;
+    height: calc(100% - 10em);
+}
+
+.card[data-count="3"] .card__swap-btn {
+    order: 4;
+}
+
+.card[data-count="4"] {
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    padding: 2%;
+}
+
+.card[data-count="4"] .card__item {
+    height: 50%;
+}
+
+.card[data-count="4"] .card__swap-btn {
+    height: 100%;
+    order: 2;
+}

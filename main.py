@@ -72,9 +72,21 @@ def settings_page():
 @app.route("/play")
 def play_page():
     session = create_session()
-    item = session.query(Items).get(random.randint(1, session.query(Items).count()))
-    quest = session.query(Quests).get(random.randint(1, session.query(Quests).count()))
-    return render_template("play_page.html", item=item, quest=quest)
+    mode = request.cookies.get("mode", "third-wheel")
+    if mode == "third-wheel":
+        try:
+            items = list(map(lambda x: session.query(Items).get(x),
+                             random.sample(range(1, session.query(Items).count()),
+                                            int(request.cookies.get("level", 1)) + 1)))
+        except ValueError:
+            abort(400, "Level must be integer")
+        return render_template("third_wheel.html", items=items)
+    elif mode == "endless-orange":
+        item = session.query(Items).get(random.randint(1, session.query(Items).count()))
+        quest = session.query(Quests).get(random.randint(1, session.query(Quests).count()))
+        return render_template("endless_orange.html", item=item, quest=quest)
+    else:
+        abort(400, "Unknown game mode")
 
 
 # ---------- AJAX ----------
@@ -114,7 +126,8 @@ def get_n_items():
 
     session = create_session()
 
-    items = random.sample(set(range(1, session.query(Items).count())) ^ set(prev_cards), count)
+    items = list(map(lambda x: session.query(Items).get(x),
+                     random.sample(set(range(1, session.query(Items).count())) ^ set(prev_cards), count)))
 
     return jsonify({
         "items": [item.to_dict() for item in items]
@@ -128,7 +141,7 @@ def excluding_randint(start, end, exclusion):
         return random.randint(start, end - 1)
     try:
         return random.choice((random.randint(start, exclusion - 1),
-                            random.randint(exclusion + 1, end)))
+                              random.randint(exclusion + 1, end)))
     except ValueError:
         return random.randint(start, end)
 

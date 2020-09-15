@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% set jquery = True %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/play_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/third_wheel.css') }}">
+{% endblock styles %}
+
+{% block content %}
+    <div class="header">
+        <a id="return-icon" href="/settings"></a>
+    </div>
+    <div class="card" data-count="{{ items | length }}">
+        <div class="preloader"></div>
+        {% for item in items %}
+            <div class="card__item" style="order: {{ loop.index }};" data-id="{{ item.id }}">
+                <img src="{{ item.filename }}" class="card__img">
+                <p class="card__item-name">{{ item.name }}</p>
+            </div>
+        {% endfor %}
+        <a class="card__swap-btn">
+            <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
+        </a>
+
+    </div>
+    <div class="footer">
+        <div class="timer">
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+            <div class="timer__cell"></div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/third_wheel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/play_page.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/remove-address-bar.js') }}"></script>
+{% endblock scripts %}

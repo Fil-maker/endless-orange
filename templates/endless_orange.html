@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="header">
-        <a id="return-icon" href="/"></a>
+        <a id="return-icon" href="/settings"></a>
     </div>
     <div class="card">
         <div class="preloader"></div>
@@ -59,6 +59,7 @@
 
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/lottie.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/endless_orange.js') }}"></script>
     <script src="{{ url_for('static', filename='js/play_page.js') }}"></script>
     <script src="{{ url_for('static', filename='js/remove-address-bar.js') }}"></script>
 {% endblock scripts %}

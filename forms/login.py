@@ -1,6 +1,4 @@
-from wtforms import PasswordField, StringField, SubmitField, SelectField, SelectMultipleField
-from wtforms.fields.html5 import EmailField, DateTimeLocalField
-from wtforms.widgets.html5 import ColorInput
+from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 
