@@ -77,7 +77,7 @@ def play_page():
         try:
             items = list(map(lambda x: session.query(Items).get(x),
                              random.sample(range(1, session.query(Items).count()),
-                                            int(request.cookies.get("level", 1)) + 1)))
+                                           int(request.cookies.get("level", 1)) + 1)))
         except ValueError:
             abort(400, "Level must be integer")
         return render_template("third_wheel.html", items=items)
@@ -147,7 +147,7 @@ def excluding_randint(start, end, exclusion):
 
 
 def main():
-    app.run(port=8080, debug=True, host="192.168.1.77")
+    app.run(port=8080, debug=True)
 
 
 if __name__ == "__main__":

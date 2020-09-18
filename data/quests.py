@@ -10,3 +10,7 @@ class Quests(SqlAlchemyBase, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     quest = sqlalchemy.Column(sqlalchemy.String)
+    image = sqlalchemy.Column(sqlalchemy.Boolean)
+    erudition = sqlalchemy.Column(sqlalchemy.Boolean)
+    leader = sqlalchemy.Column(sqlalchemy.Boolean)
+    players = sqlalchemy.Column(sqlalchemy.Boolean)
