@@ -58,7 +58,7 @@ def settings_page():
             response.set_cookie("communication_type", endless_orange_settings.communication_type.data, max_age=86400*365)
             return response
         else:
-            return redirect("settings")
+            return redirect("/settings")
 
     params = {
         "third_wheel_settings": third_wheel_settings,
