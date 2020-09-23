@@ -138,16 +138,17 @@ def settings_page():
         # Сохраняем введенные настройки в куки и перенаправляем на страницу игры
         if request.form.get("mode", None) == "third-wheel" and third_wheel_settings.validate_on_submit():
             response = make_response(redirect("/play"))
-            response.set_cookie("mode", third_wheel_settings.mode.data, max_age=86400*365)
-            response.set_cookie("level", str(third_wheel_settings.level.data), max_age=86400*365)
+            response.set_cookie("mode", third_wheel_settings.mode.data, max_age=86400 * 365)
+            response.set_cookie("level", str(third_wheel_settings.level.data), max_age=86400 * 365)
             return response
         elif request.form.get("mode", None) == "endless-orange" and endless_orange_settings.validate_on_submit():
             response = make_response(redirect("/play"))
-            response.set_cookie("mode", endless_orange_settings.mode.data, max_age=86400*365)
-            response.set_cookie("time", str(endless_orange_settings.time.data), max_age=86400*365)
-            response.set_cookie("rounds", str(endless_orange_settings.rounds.data), max_age=86400*365)
-            response.set_cookie("question_type", endless_orange_settings.question_type.data, max_age=86400*365)
-            response.set_cookie("communication_type", endless_orange_settings.communication_type.data, max_age=86400*365)
+            response.set_cookie("mode", endless_orange_settings.mode.data, max_age=86400 * 365)
+            response.set_cookie("time", str(endless_orange_settings.time.data), max_age=86400 * 365)
+            response.set_cookie("rounds", str(endless_orange_settings.rounds.data), max_age=86400 * 365)
+            response.set_cookie("question_type", endless_orange_settings.question_type.data, max_age=86400 * 365)
+            response.set_cookie("communication_type", endless_orange_settings.communication_type.data,
+                                max_age=86400 * 365)
             return response
         else:
             return redirect("/settings")
