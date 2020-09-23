@@ -51,14 +51,17 @@
                 <p>Тип вопросов: <span id="question-type-value"></span></p>
                 <div class="toggle-switch-wrapper">
                     <span>РТВ</span>
-                    <div class="toggle-switch double" tabindex="0">
+                    <div class="toggle-switch triple" tabindex="0">
                         <label for="dci-radio" class="toggler-label">
                             <input type="radio" data-position="left" id="dci-radio" value="dci" name="question_type" class="toggle-switch-radio" data-name="РТВ" data-fullname="Развитие творческого воображения" checked>
+                        </label>
+                        <label for="both-dci-tips-radio" class="toggler-label">
+                            <input type="radio" data-position="middle" id="both-dci-tips-radio" value="both-dci-tips" name="question_type" class="toggle-switch-radio" data-name="РТВ+ТРИЗ" data-fullname="Развитие творческого воображения + теория решения изобретательских задач">
                         </label>
                         <label for="tips-radio" class="toggler-label">
                             <input type="radio" data-position="right" id="tips-radio" value="tips" name="question_type" class="toggle-switch-radio" data-name="ТРИЗ" data-fullname="Теория решения изобретательских задач">
                         </label>
-                        <div class="toggler left"></div>
+                        <div class="toggler middle"></div>
                     </div>
                     <span>ТРИЗ</span>
                 </div>
@@ -72,9 +75,9 @@
                             <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}">
                             <input type="radio" data-position="left" id="host-radio" value="host" name="communication_type" class="toggle-switch-radio" data-name="туда">
                         </label>
-                        <label for="both-radio" class="toggler-label">
+                        <label for="both-host-team-radio" class="toggler-label">
                             <img src="{{ url_for('static', filename='img/communication-types/double-arrow.svg') }}">
-                            <input type="radio" data-position="middle" id="both-radio" value="both" name="communication_type" class="toggle-switch-radio" data-name="туда-сюда" checked>
+                            <input type="radio" data-position="middle" id="both-host-team-radio" value="both-host-team" name="communication_type" class="toggle-switch-radio" data-name="туда-сюда" checked>
                         </label>
                         <label for="team-radio" class="toggler-label">
                             <img src="{{ url_for('static', filename='img/communication-types/arrow.svg') }}" style="transform: rotate(180deg);">
