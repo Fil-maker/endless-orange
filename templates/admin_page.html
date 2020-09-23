@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+    <div>
+        <form  method=post enctype=multipart/form-data>
+            <h1>Добавить картинку</h1>
+            {{ Iform.hidden_tag() }}
+            {{ Iform.csrf_token }}
+            <div class="form-item">
+                {{ Iform.name() }}
+            </div>
+            <div class="form-item">
+                {{ Iform.image() }}
+            </div>
+            <div class="form-item">
+                {{ Iform.submit(type="submit", class="button") }}
+            </div>
+        </form>
+    </div>
+    <div>
+        <form action="" method="post" enctype=multipart/form-data>
+            <h1>Добавить вопрос</h1>
+            {{ Qform.hidden_tag() }}
+            {{ Qform.csrf_token }}
+            <div class="form-item">
+                {{ Qform.quest() }}
+            </div>
+            <div class="form-item">
+                <p>Воображение</p>
+                {{ Qform.image() }}
+            </div>
+            <div class="form-item">
+                <p>Эрудиция</p>
+                {{ Qform.erudition() }}
+            </div>
+            <div class="form-item">
+                <p>Только для ведущего</p>
+                {{ Qform.leader() }}
+            </div>
+            <div class="form-item">
+                <p>Для ведущего или игроков</p>
+                {{ Qform.players() }}
+            </div>
+            <div class="form-item">
+                {{ Qform.submit(type="submit", class="button") }}
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

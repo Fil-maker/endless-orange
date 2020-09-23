@@ -1,19 +1,38 @@
 import os
 import random
-from flask import Flask, render_template, request, jsonify, make_response
+from flask import Flask, render_template, request, jsonify, make_response, flash
+from flask_login import LoginManager, login_user, login_required, logout_user
 from flask_restful import abort
-from werkzeug.utils import redirect
+from werkzeug.utils import redirect, secure_filename
 
+from data.admins import Admin
 from data.db_session import global_init, create_session
 from data.items import Items
 from data.quests import Quests
+from forms.item_add import ItemForm
+from forms.login import LoginForm
 from forms.endless_orange_settings import EndlessOrangeSettingsForm
+from forms.quest_add import QuestForm
 from forms.third_wheel_settings import ThirdWheelSettingsForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "secret_key_123")
-
+app.config["UPLOAD_FOLDER"] = "static/img/items/"
+ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif', 'svg']
+login_manager = LoginManager()
+login_manager.init_app(app)
 global_init("db/endless_orange.sqlite")
+
+
+# Проверяем нужного ли файл расширения
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    session = create_session()
+    return session.query(Admin).get(user_id)
 
 
 @app.after_request
@@ -36,6 +55,79 @@ def add_header(r):
 @app.route("/")
 def main_page():
     return render_template("main_page.html")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        session = create_session()
+        username, password = form.email.data, form.password.data
+        user = session.query(Admin).filter((Admin.username == username) | (Admin.email == username)).first()
+        if user.check_password(password):
+            login_user(user)
+            return redirect('/admin')
+        else:
+            return render_template('login_page.html', form=form, login_failed=True)
+    return render_template('login_page.html', form=form, login_failed=False)
+
+
+@app.route("/admin", methods=['GET', 'POST'])
+@login_required
+def admin():
+    item_form, quest_form = ItemForm(), QuestForm()
+    if item_form.validate_on_submit():
+        # Изображение не отправлено
+        if 'image' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        name, file = item_form.name.data, request.files['image']
+        # Изображение не выбрано
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        # Всё пучком
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(full_filename)
+
+            session = create_session()
+            item = Items()
+            item.name, item.filename = name, full_filename
+
+            session.add(item)
+            session.commit()
+
+            return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=False)
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=True)
+    else:
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=True)
+    if quest_form.validate_on_submit():
+
+        session = create_session()
+        quest = Quests(quest=quest_form.quest.data, image=quest_form.image.data, erudition=quest_form.erudition.data,
+                       leader=quest_form.leader.data, players=quest_form.players.data)
+
+        session.add(quest)
+        session.commit()
+
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=False)
+    else:
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=True)
+    return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=False, item_error=False)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/login")
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect("/")
 
 
 @app.route("/settings", methods=["GET", "POST"])
