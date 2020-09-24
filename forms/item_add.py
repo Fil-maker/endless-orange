@@ -4,17 +4,13 @@ from flask_wtf import FlaskForm
 
 
 class ItemForm(FlaskForm):
-    label = 'Название предмета'
-    name = StringField(label, validators=[DataRequired()], render_kw={
+    name = StringField("Название предмета", validators=[DataRequired()], render_kw={
         "class": "input-str form-control",
         "required": True,
-        "placeholder": label
     })
 
-    label = 'Картинка'
-    image = FileField(label, validators=[DataRequired()], render_kw={
+    image = FileField('Картинка', validators=[DataRequired()], render_kw={
         "required": True,
-        "placeholder": label
     })
 
     submit = SubmitField('Отправить')

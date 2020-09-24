@@ -8,9 +8,11 @@
             {{ Iform.hidden_tag() }}
             {{ Iform.csrf_token }}
             <div class="form-item">
+                {{ Iform.name.label }}
                 {{ Iform.name() }}
             </div>
             <div class="form-item">
+                {{ Iform.image.label }}
                 {{ Iform.image() }}
             </div>
             <div class="form-item">
@@ -19,27 +21,28 @@
         </form>
     </div>
     <div>
-        <form action="" method="post" enctype=multipart/form-data>
+        <form action="" method="post">
             <h1>Добавить вопрос</h1>
             {{ Qform.hidden_tag() }}
             {{ Qform.csrf_token }}
             <div class="form-item">
+                {{ Qform.quest.label }}
                 {{ Qform.quest() }}
             </div>
             <div class="form-item">
-                <p>Воображение</p>
+                {{ Qform.image.label }}
                 {{ Qform.image() }}
             </div>
             <div class="form-item">
-                <p>Эрудиция</p>
+                {{ Qform.erudition.label }}
                 {{ Qform.erudition() }}
             </div>
             <div class="form-item">
-                <p>Только для ведущего</p>
+                {{ Qform.leader.label }}
                 {{ Qform.leader() }}
             </div>
             <div class="form-item">
-                <p>Для ведущего или игроков</p>
+                {{ Qform.players.label }}
                 {{ Qform.players() }}
             </div>
             <div class="form-item">
