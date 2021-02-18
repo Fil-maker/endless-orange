@@ -7,6 +7,7 @@
 {% endblock styles %}
 
 {% block content %}
+    <a id="return-icon" href="/"></a>
     <h2>Настройка</h2>
     <div class="select-mode">
         <h3>Выберите режим игры:</h3>
@@ -44,8 +45,12 @@
                 <input type="range" min="1" max="5" value="2" id="time-input" name="time">
             </div>
             <div class="number-of-rounds">
-                <label for="rounds-input">Количество кругов: <span id="rounds-value"></span></label>
+                <label for="rounds-input">Количество раундов: <span id="rounds-value"></span></label>
                 <input type="range" min="1" max="20" value="10" id="rounds-input" name="rounds">
+            </div>
+            <div class="number-of-players">
+                <label for="players-input">Количество игроков: <span id="players-value"></span></label>
+                <input type="range" min="2" max="6" value="4" id="players-input" name="players">
             </div>
             <div class="question-types">
                 <p>Тип вопросов: <span id="question-type-value"></span></p>
@@ -114,9 +119,11 @@
         $("#level{{ cookies.get('level', 1) }}").click(); // Уровень сложности
         $("#time-input").val({{ cookies.get('time', 2) | int }}); // Время
         $("#rounds-input").val({{ cookies.get('rounds', 10) | int }}); // Количество раундов
+        $("#players-input").val({{ cookies.get('players', 4) | int }}); // Количество игроков
         $("#{{ cookies.get('question_type', 'dci') }}-radio").prop("checked", true).change(); // Тип вопросов
         $("#{{ cookies.get('communication_type', 'both') }}-radio").prop("checked", true).change(); // Тип коммуникации
         updateTimeValue();
         updateRoundsValue();
+        updatePlayersValue();
     </script>
 {% endblock scripts %}

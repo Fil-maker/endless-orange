@@ -12,11 +12,22 @@ main.container {
     position: relative;
 }
 
+#return-icon {
+    height: 100%;
+    max-height: 4em;
+    width: 100%;
+    max-width: 4em;
+    min-height: 2em;
+    background: url("../img/return-icon.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 h2 {
     font-size: 3em;
 }
 
- h3 {
+h3 {
     text-align: left;
     font-size: 1.5em;
 }
@@ -26,7 +37,11 @@ h2 {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: distribute;
-        justify-content: space-around;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 30em;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .game-mode {
@@ -37,21 +52,16 @@ h2 {
 
     list-style-type: none;
 
-    padding: 2em 1.5em;
-    border: 1px solid #acacac;
-    border-radius: 1em;
-    margin: 1em;
+    padding: 1em 1.5em;
+    margin: 0 1em;
 
-    -webkit-transition: -webkit-box-shadow ease-out 0.1s;
+    -webkit-transition: opacity ease-out 0.1s;
 
-    transition: -webkit-box-shadow ease-out 0.1s;
+    transition: opacity ease-out 0.1s;
 
-    -o-transition: box-shadow ease-out 0.1s;
-
-    transition: box-shadow ease-out 0.1s;
-
-    transition: box-shadow ease-out 0.1s, -webkit-box-shadow ease-out 0.1s;
+    -o-transition: opacity ease-out 0.1s;
     cursor: pointer;
+    opacity: 0.4;
 }
 
 .game-mode h5 {
@@ -59,18 +69,15 @@ h2 {
 }
 
 .game-mode:hover {
-    -webkit-box-shadow: inset 0 0 0 0.3em #f5832088;
-            box-shadow: inset 0 0 0 0.3em #f5832088;
+    opacity: 0.5;
 }
 
 .game-mode:focus {
-    -webkit-box-shadow: inset 0 0 0 0.5em #f5832088;
-            box-shadow: inset 0 0 0 0.5em #f5832088;
+    opacity: 0.6;
 }
 
 .game-mode.selected, .game-mode:active {
-    -webkit-box-shadow: inset 0 0 0 0.5em #F58420;
-            box-shadow: inset 0 0 0 0.5em #F58420;
+    opacity: 1;
 }
 
 input[type="radio"] {
@@ -147,8 +154,7 @@ input[type="radio"] {
 }
 
 .settings-container {
-    height: 12em;
-    height: 10em;
+    /* height: 12em; */
     display: flex;
     align-items: center;
     margin: 1em 0;
@@ -170,9 +176,10 @@ input[type="radio"] {
 
 .endless-orange-settings {
         grid-template-areas: "t q"
-                         "r c";
-    -ms-grid-rows: 1fr 0.5em 1fr;
-    grid-template-rows: 1fr 1fr;
+                             "r c"
+                             "p .";
+    -ms-grid-rows: 1fr 0.5em 1fr 0.5em 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     -ms-grid-columns: 1fr 0.5em 1fr;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0.5em;
@@ -188,6 +195,12 @@ input[type="radio"] {
     -ms-grid-row: 3;
     -ms-grid-column: 1;
     grid-area: r;
+}
+
+.endless-orange-settings .number-of-players {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: p;
 }
 
 .endless-orange-settings .question-types {
@@ -420,7 +433,7 @@ span#tooltip {
 @media(max-height: 768px), (max-width: 768px) {
     main.container {
         height: calc(100vh - 6em); /* фолбэк для браузеров, которые не поддерживают пользовательские свойства */
-        height: calc(var(--vh, 1vh) * 100 - 8em);
+        height: calc(var(--vh, 1vh) * 100 - 6em);
         padding: 3em 20%;
     }
 
@@ -455,33 +468,27 @@ span#tooltip {
         height: fit-content;
     }
 
-    .mode-list {
-        overflow-x: auto;
-        justify-content: unset;
-    }
-
     .select-mode {
         position: relative;
     }
 
     .game-mode {
         display: inline-block;
+        
+        width: 7em;
+        min-width: 7em;
+
+        padding: 1em 1em;
+        margin: 0 0.5em;
     }
-
-    .game-mode:first-child {
-        margin-left: 3em;
-    }
-
-    .game-mode:last-child::after {
-        content: "";
-        display: block;
-        position: absolute;
-        right: -3rem;
-        width: 3rem;
-        height: 1px;
-      }
-
+    
     .endless-orange-settings {
-        grid-template-areas: "t t" "r r" "q q" "c c";
+        grid-template-areas: "t t" "r r" "p p" "q q" "c c";
+    }
+}
+
+@media(max-width: 400px) {
+    .game-mode {
+        padding: 0.5em 0.5em;
     }
 }

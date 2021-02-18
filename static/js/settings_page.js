@@ -50,9 +50,19 @@ var roundsValue = $("#rounds-value");
 var roundsInput = $("#rounds-input");
 roundsInput.on("input", updateRoundsValue)
 
+// Ввод количества игроков
+var playersValue = $("#players-value");
+var playersInput = $("#players-input");
+playersInput.on("input", updatePlayersValue)
+
 function updateRoundsValue() {
     n = roundsInput.val();
     roundsValue.text(n);
+}
+
+function updatePlayersValue() {
+    n = playersInput.val();
+    playersValue.text(n);
 }
 
 var questionTypeValue = $("#question-type-value");

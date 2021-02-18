@@ -146,6 +146,7 @@ def settings_page():
             response.set_cookie("mode", endless_orange_settings.mode.data, max_age=86400 * 365)
             response.set_cookie("time", str(endless_orange_settings.time.data), max_age=86400 * 365)
             response.set_cookie("rounds", str(endless_orange_settings.rounds.data), max_age=86400 * 365)
+            response.set_cookie("players", str(endless_orange_settings.players.data), max_age=86400 * 365)
             response.set_cookie("question_type", endless_orange_settings.question_type.data, max_age=86400 * 365)
             response.set_cookie("communication_type", endless_orange_settings.communication_type.data,
                                 max_age=86400 * 365)
