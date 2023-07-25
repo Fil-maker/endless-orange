@@ -1,0 +1,10 @@
+#blah{
+    max-width: 100%;
+}
+.before{
+    display: inline-flex;
+}
+.before img{
+    width: 50%;
+    margin: 1em;
+}

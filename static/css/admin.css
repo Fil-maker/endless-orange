@@ -1,0 +1,46 @@
+.card-area, .quest-area {
+    margin: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container.quest-container ul{
+    height: 20em;
+}
+
+.container, h1 {
+    height: min-content;
+}
+
+.container ul {
+    overflow-y: scroll;
+    height: 10em;
+    background-color: #f6f6f6;
+    border: 1px solid black;
+}
+
+.container ul li {
+    list-style: none;
+    margin: 10px;
+}
+
+.container ul li a {
+    color: #F58420;
+    text-decoration: none;
+}
+
+.container ul li a:hover {
+    color: #fcbe99;
+    text-decoration: none;
+}
+
+@media (max-width: 720px) {
+    .container, h1 {
+        margin: 0em;
+    }
+
+    .card-area, .quest-area {
+        margin: 10px;
+    }
+}

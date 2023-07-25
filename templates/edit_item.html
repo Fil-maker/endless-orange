@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/edit_item.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1>Изменить картинку "{{ item.name }}"</h1>
+    <div class="before">
+        <img src="/{{ item.filename }}" alt="not found">
+        <img id="blah" src="#" alt="your image"/>
+    </div>
+    <form method=post enctype=multipart/form-data>
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div class="form-item">
+            {{ form.name.label }}
+            {{ form.name() }}
+        </div>
+        <div class="form-item">
+            {{ form.image.label }}
+            {{ form.image(onChange="readURL(this);") }}
+        </div>
+        <div class="form-item">
+            {{ form.submit(type="submit", class="button") }}
+        </div>
+    </form>
+{% endblock %}

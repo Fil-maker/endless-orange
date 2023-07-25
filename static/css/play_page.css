@@ -195,7 +195,7 @@ main.container {
 }
 
 .card__img {
-    height: auto;
+    height: inherit;
     max-height: 100%;
     margin: 1em 0;
 }

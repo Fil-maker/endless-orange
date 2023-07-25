@@ -1,54 +1,84 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<main>
-    <div>
-        <form  method=post enctype=multipart/form-data>
-            <h1>Добавить картинку</h1>
-            {{ Iform.hidden_tag() }}
-            {{ Iform.csrf_token }}
-            <div class="form-item">
-                {{ Iform.name.label }}
-                {{ Iform.name() }}
+    <main>
+        <div class="card-area">
+            <div class="card-add">
+                <form method=post enctype=multipart/form-data>
+                    <h1>Добавить картинку</h1>
+                    {{ Iform.hidden_tag() }}
+                    {{ Iform.csrf_token }}
+                    <div class="form-item">
+                        {{ Iform.name.label }}
+                        {{ Iform.name() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Iform.image.label }}
+                        {{ Iform.image() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Iform.submit(type="submit", class="button") }}
+                    </div>
+                </form>
             </div>
-            <div class="form-item">
-                {{ Iform.image.label }}
-                {{ Iform.image() }}
+            <div class="card-nav">
+                <h1>Изменить имеющуюся картинку</h1>
+                <div class="container card-container">
+                    <ul>
+                        {% for item in items %}
+                            <li><a href="/admin/item/{{ item.id }}">{{ item.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="form-item">
-                {{ Iform.submit(type="submit", class="button") }}
+        </div>
+        <div class="quest-area">
+            <div class="quest-add">
+                <form action="" method="post">
+                    <h1>Добавить вопрос</h1>
+                    {{ Qform.hidden_tag() }}
+                    {{ Qform.csrf_token }}
+                    <div class="form-item">
+                        {{ Qform.quest.label }}
+                        {{ Qform.quest() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Qform.image.label }}
+                        {{ Qform.image() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Qform.erudition.label }}
+                        {{ Qform.erudition() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Qform.leader.label }}
+                        {{ Qform.leader() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Qform.players.label }}
+                        {{ Qform.players() }}
+                    </div>
+                    <div class="form-item">
+                        {{ Qform.submit(type="submit", class="button") }}
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div>
-        <form action="" method="post">
-            <h1>Добавить вопрос</h1>
-            {{ Qform.hidden_tag() }}
-            {{ Qform.csrf_token }}
-            <div class="form-item">
-                {{ Qform.quest.label }}
-                {{ Qform.quest() }}
+            <div class="quest-nav">
+                <h1>Изменить имеющийся вопрос</h1>
+                <div class="container quest-container">
+                    <ul>
+                        {% for item in quests %}
+                            <li><a href="/admin/quest/{{ item.id }}">{{ item.quest }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="form-item">
-                {{ Qform.image.label }}
-                {{ Qform.image() }}
-            </div>
-            <div class="form-item">
-                {{ Qform.erudition.label }}
-                {{ Qform.erudition() }}
-            </div>
-            <div class="form-item">
-                {{ Qform.leader.label }}
-                {{ Qform.leader() }}
-            </div>
-            <div class="form-item">
-                {{ Qform.players.label }}
-                {{ Qform.players() }}
-            </div>
-            <div class="form-item">
-                {{ Qform.submit(type="submit", class="button") }}
-            </div>
-        </form>
-    </div>
-</main>
+        </div>
+
+    </main>
 {% endblock %}

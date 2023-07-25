@@ -168,7 +168,7 @@ input[type="radio"] {
     width: 100%;
 }
 
-.endless-orange-settings {
+.endless-orange-settings, .third-wheel-settings {
         grid-template-areas: "t q"
                          "r c";
     -ms-grid-rows: 1fr 0.5em 1fr;

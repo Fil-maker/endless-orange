@@ -57,6 +57,11 @@ def main_page():
     return render_template("main_page.html")
 
 
+@app.route("/rules")
+def rules_page():
+    return render_template("rules.html")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -76,7 +81,10 @@ def login():
 @login_required
 def admin():
     item_form, quest_form = ItemForm(), QuestForm()
-    if item_form.validate_on_submit():
+    session = create_session()
+    items = session.query(Items).all()
+    quests = session.query(Quests).all()
+    if item_form.validate_on_submit() and not quest_form.validate_on_submit():
         # Изображение не отправлено
         if 'image' not in request.files:
             flash('No file part')
@@ -101,9 +109,10 @@ def admin():
 
             return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=False)
         return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=True)
-    else:
-        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=True)
-    if quest_form.validate_on_submit():
+    elif not quest_form.validate_on_submit():
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, item_error=True, items=items,
+                               quests=quests)
+    if quest_form.validate_on_submit() and not item_form.validate_on_submit():
 
         session = create_session()
         quest = Quests(quest=quest_form.quest.data, image=quest_form.image.data, erudition=quest_form.erudition.data,
@@ -113,9 +122,38 @@ def admin():
         session.commit()
 
         return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=False)
-    else:
-        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=True)
-    return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=False, item_error=False)
+    elif not item_form.validate_on_submit():
+        return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=True, items=items,
+                               quests=quests)
+    return render_template('admin_page.html', Iform=item_form, Qform=quest_form, quest_error=False, item_error=False,
+                           items=items, quests=quests)
+
+
+@app.route("/admin/item/<int:item_id>", methods=['GET', 'POST'])
+@login_required
+def edit_item(item_id):
+    item_form = ItemForm()
+    session = create_session()
+    item = session.query(Items).get(item_id)
+    if item_form.validate_on_submit():
+        # Изображение не отправлено
+        if 'image' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        name, file = item_form.name.data, request.files['image']
+        # Изображение не выбрано
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        # Всё пучком
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            print(name)
+            print(full_filename)
+        return redirect("/admin")
+    item_form.name.data = item.name
+    return render_template("edit_item.html", form=item_form, item=item, jquery=True)
 
 
 @app.route("/logout")
@@ -140,6 +178,8 @@ def settings_page():
             response = make_response(redirect("/play"))
             response.set_cookie("mode", third_wheel_settings.mode.data, max_age=86400 * 365)
             response.set_cookie("level", str(third_wheel_settings.level.data), max_age=86400 * 365)
+            response.set_cookie("time", str(third_wheel_settings.wheel_time.data), max_age=86400 * 365)
+            response.set_cookie("rounds", str(third_wheel_settings.wheel_rounds.data), max_age=86400 * 365)
             return response
         elif request.form.get("mode", None) == "endless-orange" and endless_orange_settings.validate_on_submit():
             response = make_response(redirect("/play"))
@@ -152,13 +192,11 @@ def settings_page():
             return response
         else:
             return redirect("/settings")
-
     params = {
         "third_wheel_settings": third_wheel_settings,
         "endless_orange_settings": endless_orange_settings,
         "cookies": request.cookies
     }
-
     return render_template("settings_page.html", **params)
 
 
@@ -166,6 +204,7 @@ def settings_page():
 def play_page():
     session = create_session()
     mode = request.cookies.get("mode", "third-wheel")
+    time = request.cookies.get("time", "third-wheel")
     if mode == "third-wheel":
         try:
             items = list(map(lambda x: session.query(Items).get(x),
@@ -173,11 +212,11 @@ def play_page():
                                            int(request.cookies.get("level", 1)) + 1)))
         except ValueError:
             abort(400, "Level must be integer")
-        return render_template("third_wheel.html", items=items)
+        return render_template("third_wheel.html", items=items, time=time)
     elif mode == "endless-orange":
         item = session.query(Items).get(random.randint(1, session.query(Items).count()))
         quest = session.query(Quests).get(random.randint(1, session.query(Quests).count()))
-        return render_template("endless_orange.html", item=item, quest=quest)
+        return render_template("endless_orange.html", item=item, quest=quest, time=time)
     else:
         abort(400, "Unknown game mode")
 

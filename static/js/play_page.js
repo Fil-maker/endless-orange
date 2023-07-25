@@ -28,6 +28,11 @@ var needsToUpdate = false;
 var preloader = $(".preloader");
 
 var interval;
+var length;
+
+function set_length(l){
+    length = l;
+}
 
 function resetTimer() {
     clearInterval(interval);
@@ -46,7 +51,7 @@ function resetTimer() {
             cell.addClass("empty");
             i++;
         }
-    }, 60 * 1000 / cell_count)
+    }, length * 60 * 1000 / cell_count)
 }
 
 $(window).on("resize", resize_timer_line);

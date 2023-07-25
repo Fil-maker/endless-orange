@@ -45,6 +45,21 @@ function updateTimeValue() {
     }
 }
 
+var wheel_timeValue = $("#wheel-time-value");
+var wheel_timeInput = $("#wheel-time-input");
+wheel_timeInput.on("input", updateWheelTimeValue);
+
+function updateWheelTimeValue() {
+    n = wheel_timeInput.val();
+    if (n == 1) {
+        wheel_timeValue.text(n + " минута");
+    } else if (n < 5) {
+        wheel_timeValue.text(n + " минуты");
+    } else {
+        wheel_timeValue.text(n + " минут");
+    }
+}
+
 // Ввод количества раундов
 var roundsValue = $("#rounds-value");
 var roundsInput = $("#rounds-input");
@@ -53,6 +68,15 @@ roundsInput.on("input", updateRoundsValue)
 function updateRoundsValue() {
     n = roundsInput.val();
     roundsValue.text(n);
+}
+
+var wheel_roundsValue = $("#wheel-rounds-value");
+var wheel_roundsInput = $("#wheel-rounds-input");
+wheel_roundsInput.on("input", updateWheelRoundsValue)
+
+function updateWheelRoundsValue() {
+    n = wheel_roundsInput.val();
+    wheel_roundsValue.text(n);
 }
 
 var questionTypeValue = $("#question-type-value");

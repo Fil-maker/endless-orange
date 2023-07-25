@@ -35,6 +35,14 @@
                 <div class="form-radio"><input type="radio" name="level" id="level2" value="2"><label for="level2" class="marker" tabindex="1"><div class="inner"></div></label><label for="level2">2 уровень (3 карточки)</label></div>
                 <div class="form-radio"><input type="radio" name="level" id="level3" value="3"><label for="level3" class="marker" tabindex="1"><div class="inner"></div></label><label for="level3">3 уровень (4 карточки)</label></div>
             </div>
+            <div class="time">
+                <label for="wheel-time-input">Время раунда: <span id="wheel-time-value"></span></label>
+                <input type="range" min="1" max="5" value="2" id="wheel-time-input" name="wheel_time">
+            </div>
+            <div class="number-of-rounds">
+                <label for="wheel-rounds-input">Количество кругов: <span id="wheel-rounds-value">\</span></label>
+                <input type="range" min="1" max="20" value="10" id="wheel-rounds-input" name="wheel_rounds">
+            </div>
         </form>
         <form action method="post" class="settings endless-orange-settings">
             <input type="hidden" name="mode" value="endless-orange">
@@ -118,5 +126,7 @@
         $("#{{ cookies.get('communication_type', 'both') }}-radio").prop("checked", true).change(); // Тип коммуникации
         updateTimeValue();
         updateRoundsValue();
+        updateWheelTimeValue();
+        updateWheelRoundsValue();
     </script>
 {% endblock scripts %}

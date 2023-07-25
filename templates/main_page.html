@@ -10,15 +10,11 @@
     <h1>Бесконечный апельсин - игра для умных</h1>
     <div class="menu">
         <div class="left">
-            <div class="rules" style="display: none;">
-                <p>Игрок с устройством берет на себя роль ведущего и выбирает случайный предмет и вопрос к нему, нажав на кнопку "Играть". После чего отвечает на вопрос о предмете так чтобы, другие игроки поняли, о каком предмете идёт речь. Первый, кто угадает предмет, получает балл. Тот, кто набрал больше всего баллов, побеждает.</p>
-                <button class="transparent-button bordered" id="rules__go-back">Назад<span></span></button>                
-            </div>
             <img class="orange-logo" src="{{ url_for('static', filename='img/orange.svg') }}" alt="апельсин">
         </div>
         <div class="menu__buttons">
-            <a class="transparent-button animation-trigger" id="rules-button">Правила<span></span></a>
             <a class="transparent-button" id="play-button" href="/settings">Играть<span></span></a>
+            <a class="transparent-button"href="/rules">Правила<span></span></a>
         </div>
     </div>
 {% endblock %}
