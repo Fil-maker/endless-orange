@@ -24,6 +24,23 @@ login_manager.init_app(app)
 global_init("db/endless_orange.sqlite")
 
 
+def get_question(question_type, question_communication, excluding_id:int=None):
+    session = create_session()
+    quests = session.query(Quests)
+    if question_type == "dci":
+        quests = quests.filter(Quests.image==1)
+    else:
+        quests = quests.filter(Quests.erudition == 1)
+    if question_communication == "host":
+        quests = quests.filter(Quests.leader == 1)
+    else:
+        quests = quests.filter(Quests.players == 1)
+    if excluding_id:
+        quests = quests.filter(Quests.id != excluding_id)
+    return quests.all()[random.randint(0, quests.count() - 1)]
+
+
+
 # Проверяем нужного ли файл расширения
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -204,7 +221,7 @@ def settings_page():
 def play_page():
     session = create_session()
     mode = request.cookies.get("mode", "third-wheel")
-    time = request.cookies.get("time", "third-wheel")
+    time = request.cookies.get("time", "1")
     if mode == "third-wheel":
         try:
             items = list(map(lambda x: session.query(Items).get(x),
@@ -215,8 +232,11 @@ def play_page():
         return render_template("third_wheel.html", items=items, time=time)
     elif mode == "endless-orange":
         item = session.query(Items).get(random.randint(1, session.query(Items).count()))
-        quest = session.query(Quests).get(random.randint(1, session.query(Quests).count()))
-        return render_template("endless_orange.html", item=item, quest=quest, time=time)
+        communication_type = request.cookies.get("communication_type", "host")
+        question_type = request.cookies.get("question_type", "tips")
+        quest = get_question(question_type, communication_type)
+        return render_template("endless_orange.html", item=item, quest=quest, time=time,
+                               c_type=communication_type, q_type=question_type)
     else:
         abort(400, "Unknown game mode")
 
@@ -229,6 +249,8 @@ def get_new_card():
     try:
         prev_item_id = int(data["previousItemId"])
         prev_quest_id = int(data["previousQuestId"])
+        question_type = data["question_type"]
+        communication_type = data["communication_type"]
     except ValueError:
         abort(400, "Id must be integer")
         return
@@ -236,10 +258,9 @@ def get_new_card():
     session = create_session()
 
     item_id = excluding_randint(1, session.query(Items).count(), prev_item_id)
-    quest_id = excluding_randint(1, session.query(Quests).count(), prev_quest_id)
 
     item = session.query(Items).get(item_id)
-    quest = session.query(Quests).get(quest_id)
+    quest = get_question(question_type, communication_type, excluding_id=prev_quest_id)
     return jsonify({
         "item": item.to_dict(),
         "quest": quest.to_dict()

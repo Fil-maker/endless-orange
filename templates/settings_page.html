@@ -7,6 +7,7 @@
 {% endblock styles %}
 
 {% block content %}
+    <a id="return-icon" href="/"></a>
     <h2>Настройка</h2>
     <div class="select-mode">
         <h3>Выберите режим игры:</h3>
@@ -40,7 +41,7 @@
                 <input type="range" min="1" max="5" value="2" id="wheel-time-input" name="wheel_time">
             </div>
             <div class="number-of-rounds">
-                <label for="wheel-rounds-input">Количество кругов: <span id="wheel-rounds-value">\</span></label>
+                <label for="wheel-rounds-input">Количество раундов: <span id="wheel-rounds-value">\</span></label>
                 <input type="range" min="1" max="20" value="10" id="wheel-rounds-input" name="wheel_rounds">
             </div>
         </form>

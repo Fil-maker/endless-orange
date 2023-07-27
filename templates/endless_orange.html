@@ -64,5 +64,7 @@
     <script src="{{ url_for('static', filename='js/remove-address-bar.js') }}"></script>
     <script>
         set_length({{ time }});
+        communication_type = '{{ c_type }}';
+        question_type = '{{ q_type }}'
     </script>
 {% endblock scripts %}
