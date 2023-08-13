@@ -6,16 +6,25 @@
     flex-wrap: wrap;
     justify-content: space-around;
 
-    padding: 5%;
+    /*padding: 5%;*/
 }
 
 .card[data-count="3"] .card__item {
-    width: 30%;
-    height: calc(100% - 10em);
+    width: 40%;
+    height: 40%;
+    /*height: calc(100% - 10em);*/
 }
 
 .card[data-count="3"] .card__swap-btn {
     order: 4;
+}
+
+.card[data-count="3"] .card__swap-btn{
+    width: 40%;
+}
+
+.card[data-count="3"] .card__swap-btn #swap-btn{
+    height: 10em;
 }
 
 .card[data-count="4"] {
