@@ -5,15 +5,15 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from flask_restful import abort
 from werkzeug.utils import redirect, secure_filename
 
-from data.admins import Admin
-from data.db_session import global_init, create_session
-from data.items import Items
-from data.quests import Quests
-from forms.item_add import ItemForm
-from forms.login import LoginForm
-from forms.endless_orange_settings import EndlessOrangeSettingsForm
-from forms.quest_add import QuestForm
-from forms.third_wheel_settings import ThirdWheelSettingsForm
+from app.data.admins import Admin
+from app.data.db_session import global_init, create_session
+from app.data.items import Items
+from app.data.quests import Quests
+from app.forms.item_add import ItemForm
+from app.forms.login import LoginForm
+from app.forms.endless_orange_settings import EndlessOrangeSettingsForm
+from app.forms.quest_add import QuestForm
+from app.forms.third_wheel_settings import ThirdWheelSettingsForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "secret_key_123")
@@ -299,9 +299,9 @@ def excluding_randint(start, end, exclusion):
         return random.randint(start, end)
 
 
-def main():
-    app.run(port=8080, debug=True)
-
-
+# def main():
+#
+#
+#
 if __name__ == "__main__":
-    main()
+    app.run(host="127.0.0.1", port=8000)

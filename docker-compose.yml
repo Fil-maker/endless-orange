@@ -1,0 +1,11 @@
+version: '3'
+services:
+  sci_back:
+    build: ./app
+    container_name: orange
+    restart: on-failure
+    volumes:
+      - ./app:/app/app
+    ports:
+      - "80:8000"
+    command: gunicorn -b 0.0.0.0:8000 main:app --reload

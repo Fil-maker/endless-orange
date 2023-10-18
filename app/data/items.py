@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy_serializer import SerializerMixin
 
-from data.db_session import SqlAlchemyBase
+from app.data.db_session import SqlAlchemyBase
 
 
 class Items(SqlAlchemyBase, SerializerMixin):

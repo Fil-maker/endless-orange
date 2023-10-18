@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from sqlalchemy_serializer import SerializerMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from data.db_session import SqlAlchemyBase
+from app.data.db_session import SqlAlchemyBase
 
 
 class Admin(SqlAlchemyBase, UserMixin, SerializerMixin):
