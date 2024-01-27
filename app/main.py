@@ -166,8 +166,7 @@ def edit_item(item_id):
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            print(name)
-            print(full_filename)
+            file.save(full_filename)
         return redirect("/admin")
     item_form.name.data = item.name
     return render_template("edit_item.html", form=item_form, item=item, jquery=True)
@@ -304,4 +303,4 @@ def excluding_randint(start, end, exclusion):
 #
 #
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000)
+    app.run(host="127.0.0.1", port=8000, debug=True)

@@ -19,9 +19,14 @@
                 <p class="card__item-name">{{ item.name }}</p>
             </div>
         {% endfor %}
-        <a class="card__swap-btn">
-            <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
-        </a>
+        <div class="control__card">
+            <a class="card__pause-btn">
+                <div class="lottie" id="pause-btn" data-url="{{ url_for('static', filename='pause-icon.json') }}"></div>
+            </a>
+            <a class="card__swap-btn">
+                <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
+            </a>
+        </div>
 
     </div>
     <div class="footer">

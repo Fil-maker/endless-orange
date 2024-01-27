@@ -10,15 +10,20 @@
     <div class="header">
         <a id="return-icon" href="/settings"></a>
     </div>
-    <div class="card">
+    <div class="card endless__card">
         <div class="preloader"></div>
         <div class="card__item" data-id="{{ item.id }}">
             <img src="{{ item.filename }}" class="card__img">
             <p class="card__item-name">{{ item.name }}</p>
         </div>
-        <a class="card__swap-btn">
-            <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
-        </a>
+        <div class="control__card">
+            <a class="card__pause-btn">
+                <div class="lottie" id="pause-btn" data-url="{{ url_for('static', filename='pause-icon.json') }}"></div>
+            </a>
+            <a class="card__swap-btn">
+                <div class="lottie" id="swap-btn" data-url="{{ url_for('static', filename='swap-icon.json') }}"></div>
+            </a>
+        </div>
         <p class="card__quest" data-id="{{ quest.id }}">{{ quest.quest }}</p>
     </div>
     <div class="footer">

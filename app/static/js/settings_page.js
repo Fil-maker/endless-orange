@@ -38,10 +38,10 @@ function updateTimeValue() {
     n = timeInput.val();
     if (n == 1) {
         timeValue.text(n + " минута");
-    } else if (n < 5) {
+    } else if (n < 6) {
         timeValue.text(n + " минуты");
     } else {
-        timeValue.text(n + " минут");
+        timeValue.text("бесконечный апельсин");
     }
 }
 
@@ -53,10 +53,10 @@ function updateWheelTimeValue() {
     n = wheel_timeInput.val();
     if (n == 1) {
         wheel_timeValue.text(n + " минута");
-    } else if (n < 5) {
+    } else if (n < 6) {
         wheel_timeValue.text(n + " минуты");
     } else {
-        wheel_timeValue.text(n + " минут");
+        wheel_timeValue.text("бесконечный апельсин");
     }
 }
 

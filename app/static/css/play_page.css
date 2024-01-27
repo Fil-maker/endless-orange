@@ -178,7 +178,7 @@ main.container {
     align-items: center;
 }
 
-.card__swap-btn {
+.card__swap-btn, .card__pause-btn {
     width: 10em;
     cursor: pointer;
 
@@ -206,6 +206,18 @@ main.container {
     max-width: min-content;
     font-size: 1.5em;
     font-family: "Russo one", sans-serif;
+}
+
+.endless__card .card__item .card__img{
+    height: auto;
+    max-height: 80%;
+}
+
+.control__card {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .card__quest {
@@ -259,6 +271,18 @@ main.container {
     .card {
         flex-direction: column;
         padding: 5% 0;
+        overflow: auto;
+    }
+
+    .endless__card .control__card{
+        height: 30%;
+        width: 30%;
+        flex-wrap: nowrap;
+    }
+
+    .endless__card .control__card .card__swap-btn,
+    .endless__card .control__card .card__pause-btn{
+        height: 80%;
     }
 
     @media (max-width: 800px) {
@@ -267,15 +291,15 @@ main.container {
         }
     }
 
-    .card__item, .card__quest {
-        /*width: 100%;*/
+/*    .card__item, .card__quest {
+        width: 100%;
     }
-
-    .card__swap-btn {
+*/
+    .card__swap-btn, .card__pause-btn {
         height: 15%;
     }
 
-    #swap-btn {
+    #swap-btn, #pause-btn {
         max-width: 100%;
         height: 100%;
         display: flex;
@@ -283,7 +307,7 @@ main.container {
         align-items: center;
     }
 
-    #swap-btn > svg {
+    #swap-btn > svg, #pause-btn > svg {
         width: auto !important;
         height: 100% !important;
     }
@@ -329,8 +353,8 @@ main.container {
             flex-wrap: nowrap !important;
         }
     }
-    .card__item, .card__swap-btn {
-        width: 20%
+    .card__item{
+        width: 40%
     }
 }
 
@@ -345,7 +369,7 @@ main.container {
         height: calc(var(--vh, 1vh) * 100 - 2em);
     }
 
-    .card__swap-btn {
+    .card__swap-btn, .card__pause-btn {
         width: 6em;
     }
 }

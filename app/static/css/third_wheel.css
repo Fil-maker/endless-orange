@@ -1,4 +1,23 @@
-.card[data-count="2"] .card__swap-btn {
+
+@media (orientation: portrait){
+    .card__swap-btn, .card__pause-btn {
+        padding: 0;
+        height: 100%;
+    }
+}
+@media (max-width: 1100px) {
+    .card[data-count="2"] .control__card {
+        height: 10%;
+        width: 50%;
+        flex-wrap: nowrap;
+    }
+    .card[data-count="2"] .card__item{
+        /*width: fit-content;
+        height: unset;*/
+        font-size: 12px;
+    }
+}
+.card[data-count="2"] .control__card {
     order: 1;
 }
 
@@ -15,15 +34,16 @@
     /*height: calc(100% - 10em);*/
 }
 
-.card[data-count="3"] .card__swap-btn {
+.card[data-count="3"] .control__card {
     order: 4;
 }
 
-.card[data-count="3"] .card__swap-btn{
+.card[data-count="3"] .control__card .card__swap-btn,
+.card[data-count="3"] .control__card .card__pause-btn, .card[data-count="3"] .control__card{
     width: 40%;
 }
 
-.card[data-count="3"] .card__swap-btn #swap-btn{
+.card[data-count="3"] .control__card{
     height: 10em;
 }
 
@@ -38,7 +58,19 @@
     height: 50%;
 }
 
-.card[data-count="4"] .card__swap-btn {
+@media (orientation: portrait){
+    .card[data-count="4"] .control__card .card__swap-btn,
+    .card[data-count="4"] .control__card .card__pause-btn {
+        padding: 0;
+        height: 15%;
+    }
+    .card[data-count="4"] .card__item p{
+        font-size: 12px;
+    }
+}
+
+.card[data-count="4"] .control__card {
     height: 100%;
+    width: 15%;
     order: 2;
 }
